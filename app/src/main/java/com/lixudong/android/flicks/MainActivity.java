@@ -1,9 +1,15 @@
 package com.lixudong.android.flicks;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.lixudong.android.flicks.adapters.MovieArrayAdapter;
@@ -38,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_title);
 
-        //intialize the tmDBClient and set page number to 1
+        //initialize the tmDBClient and set page number to 1
         tmDbClient = new TMDbClient();
         page = 1;
 
@@ -90,6 +98,19 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Debug", "Faile to get popular movie with error: " + throwable.getStackTrace());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchItem.expandActionView();
+        searchView.requestFocus();
+
+        return super.onCreateOptionsMenu(menu);
     }
 
 }

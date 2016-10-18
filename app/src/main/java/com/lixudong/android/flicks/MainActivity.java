@@ -1,5 +1,6 @@
 package com.lixudong.android.flicks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.lixudong.android.flicks.adapters.MovieArrayAdapter;
@@ -55,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                Movie movie = movies.get(position);
+                intent.putExtra("tvTitle", movie.getOriginalTitle());
+                intent.putExtra("tvDescribe", movie.getOverview());
+                intent.putExtra("ivPoster", movie.getPosterPath());
+                startActivityForResult(intent, 20);
+            }
+        });
+
         populateMovieList(tmDbClient, page);
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);

@@ -19,4 +19,8 @@
     <style name="MyActionBarTabText" parent="@style/Widget.AppCompat.ActionBar.TabText">
         <item name="android:textColor">@color/pure_white</item>
     </style>
+
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
 </resources>

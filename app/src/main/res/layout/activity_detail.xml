@@ -41,4 +41,14 @@
         android:layout_below="@+id/rbDetail"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return"
+        android:id="@+id/btReturn"
+        android:onClick="returnToMain"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/tvTitleDetail"
+        android:layout_alignStart="@+id/tvTitleDetail" />
+
 </RelativeLayout>

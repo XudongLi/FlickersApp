@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("tvTitle", movie.getOriginalTitle());
                 intent.putExtra("tvDescribe", movie.getOverview());
                 intent.putExtra("ivPoster", movie.getPosterPath());
+                intent.putExtra("rating", movie.getRating());
                 startActivityForResult(intent, 20);
             }
         });
